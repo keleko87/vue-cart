@@ -28,8 +28,7 @@ export default {
     border-radius: 10px;
     color: $white;
     height: 72px;
-    max-width: $view-max-width;
-    margin: 40px auto;
+    margin: 40px auto 10px auto;
     padding: 0 1.5rem; // 24px;
   }
 }

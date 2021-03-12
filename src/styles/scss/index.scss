@@ -7,6 +7,8 @@ body {
     box-sizing: border-box;
     font-family: "Monserrat", sans-serif;
     font-size: 16px;
+    max-width: $view-max-width;
+    margin: 0 auto;
   }
 
   h3 {

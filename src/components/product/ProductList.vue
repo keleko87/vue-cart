@@ -69,26 +69,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$grid-gap: 2rem;
+$grid-gap: 3rem;
 
 .product-list {
   &__content {
     display: grid;
     grid-gap: $grid-gap;
-    grid-template-columns: repeat(auto-fit, calc(100% - #{$grid-gap}));
+    grid-template-columns: repeat(auto-fit, calc(100% - 2rem));
     justify-content: center;
 
     @media (min-width: #{$view-max-width}) {
-      grid-template-columns: repeat(auto-fit, calc(50% - #{$grid-gap}));
-    }
-  }
-
-  &__info {
-    &--title {
-      margin-bottom: 0.25rem;
-    }
-    &--text {
-      margin-top: 0;
+      grid-template-columns: repeat(auto-fit, calc(50% - 2rem));
     }
   }
 }

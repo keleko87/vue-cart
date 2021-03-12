@@ -5,6 +5,18 @@
     </div>
 
     <div v-else class="home__content">
+      <div class="home__search">
+        <search
+          :placeholder="search.placeholder"
+          @search="filterList({ query: $event, field: search.field })"
+          @clear="clearFilteredList"
+        />
+      </div>
+
+      <div v-if="!products.length" class="cart__empty">
+        <not-found-card :title="notFound.title" :text="notFound.text" />
+      </div>
+
       <div class="home__list">
         <product-list
           :list="products"
@@ -20,19 +32,36 @@
 import { mapActions, mapGetters } from "vuex";
 
 const ProductList = () => import("@/components/product/ProductList");
+const NotFoundCard = () => import("@/components/not-found/NotFoundCard");
 const Spinner = () => import("@/components/loader/Spinner");
+const Search = () => import("@/components/search/Search");
 
 export default {
   name: "Home",
 
   components: {
     ProductList,
-    Spinner
+    NotFoundCard,
+    Spinner,
+    Search
+  },
+
+  data() {
+    return {
+      search: {
+        field: "title",
+        placeholder: "Buscar producto"
+      },
+      notFound: {
+        title: "No se encontraron resultados",
+        text: `Comprueba si lo que has escrito es correcto o prueba a realizar una nueva búsqueda.`
+      }
+    };
   },
 
   computed: {
     ...mapGetters({
-      products: "product/list",
+      products: "product/listFiltered",
       loading: "product/loading"
     })
   },
@@ -44,6 +73,8 @@ export default {
   methods: {
     ...mapActions({
       findAll: "product/findAll",
+      filterList: "product/filterList",
+      clearFilteredList: "product/clearFilteredList",
       addItemInCart: "cart/addItemInCart"
     }),
 
@@ -59,9 +90,8 @@ export default {
 
 <style scoped lang="scss">
 .home {
-  &__list {
-    max-width: $view-max-width;
-    margin: 0 auto;
+  &__search {
+    margin-bottom: 0.5rem;
   }
 }
 </style>

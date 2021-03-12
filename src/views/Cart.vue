@@ -7,12 +7,7 @@
       </button>
     </div>
     <div v-if="!cartItems.length" class="cart__empty">
-      <div class="cart__card-info">
-        <h3>
-          Tu cesta está vacía
-        </h3>
-        <p>Vuelve a nuestra lista de productos para añadir lo que desees.</p>
-      </div>
+      <not-found-card :title="notFound.title" :text="notFound.text" />
     </div>
 
     <div v-else class="cart__content">
@@ -31,12 +26,23 @@
 import { mapActions, mapGetters } from "vuex";
 
 const ProductList = () => import("@/components/product/ProductList");
+const NotFoundCard = () => import("@/components/not-found/NotFoundCard");
 
 export default {
   name: "cart",
 
   components: {
-    ProductList
+    ProductList,
+    NotFoundCard
+  },
+
+  data() {
+    return {
+      notFound: {
+        title: "Tu cesta está vacía",
+        text: "Vuelve a nuestra lista de productos para añadir lo que desees."
+      }
+    };
   },
 
   computed: {
@@ -59,12 +65,10 @@ export default {
 
 <style scoped lang="scss">
 .cart {
-  max-width: $view-max-width;
-  margin: 0 auto;
-
   &__return-home {
     display: flex;
     align-items: center;
+    margin-bottom: 0.875rem;
   }
 
   &__empty {
