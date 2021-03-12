@@ -6,7 +6,7 @@
 
     <div v-else class="home__content">
       <div class="home__list">
-        <product-list :list="products" />
+        <product-list :list="products" @addCart="addCart($event)" />
       </div>
     </div>
   </div>
@@ -40,11 +40,15 @@ export default {
   methods: {
     ...mapActions({
       findAll: "product/findAll",
-      setItemPage: "search/setItemPage"
+      addItemInCart: "cart/addItemInCart"
     }),
 
     async findAllProduts() {
       await this.findAll();
+    },
+
+    addCart(ev) {
+      this.addItemInCart(ev);
     }
   }
 };

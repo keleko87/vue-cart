@@ -6,7 +6,17 @@
         :key="item.id"
         class="product-list__content--item"
       >
-        <product-card :info="item" />
+        <product-card :info="item">
+          <template slot="action">
+            <button
+              class="app-button app-button__primary"
+              @click="addCart(item)"
+            >
+              <em class="fas fa-cart-plus app-button__icon"></em>
+              <span class="app-button__text">Añadir cesta</span>
+            </button>
+          </template>
+        </product-card>
       </div>
     </div>
   </div>
@@ -27,6 +37,12 @@ export default {
     list: {
       type: Array,
       default: () => []
+    }
+  },
+
+  methods: {
+    addCart(item) {
+      this.$emit("addCart", item);
     }
   }
 };

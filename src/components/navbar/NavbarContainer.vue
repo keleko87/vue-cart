@@ -11,11 +11,20 @@
           </div>
         </div>
       </template>
+      <template slot="right-nav">
+        <button class="app-button app-button__default" @click="goToCart()">
+          <em class="fas fa-shopping-cart app-button__icon"></em>
+          <span class="app-button__text"
+            >Mi cesta ({{ cartItems.length }})</span
+          >
+        </button>
+      </template>
     </navbar>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Navbar from "@/components/navbar/Navbar";
 
 export default {
@@ -23,6 +32,16 @@ export default {
 
   components: {
     Navbar
+  },
+
+  computed: {
+    ...mapGetters({
+      cartItems: "cart/items"
+    })
+  },
+
+  methods: {
+    goToCart() {}
   }
 };
 </script>

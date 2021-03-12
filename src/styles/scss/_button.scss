@@ -1,0 +1,49 @@
+.app-button {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem; // 8px
+  border-radius: 4px;
+  border: none;
+  color: $white;
+  font-size: 0.75rem; // 12px
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__primary {
+    background-color: $blue;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+  }
+
+  &__secondary {
+    background-color: $red;
+
+    &:hover {
+      background-color: $dark-red;
+    }
+  }
+
+  &__default {
+    background-color: transparent;
+
+    &:hover {
+      color: $light-blue;
+    }
+  }
+
+  &__icon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  &__text {
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+  }
+}
