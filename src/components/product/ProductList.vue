@@ -9,11 +9,21 @@
         <product-card :info="item">
           <template slot="action">
             <button
-              class="app-button app-button__primary"
-              @click="addCart(item)"
+              class="app-button "
+              :class="{
+                'app-button__primary': action === 'add',
+                'app-button__secondary': action === 'remove'
+              }"
+              @click="itemAction(item)"
             >
-              <em class="fas fa-cart-plus app-button__icon"></em>
-              <span class="app-button__text">Añadir cesta</span>
+              <em
+                class="app-button__icon fas"
+                :class="{
+                  'fa-cart-plus': action === 'add',
+                  'fa-shopping-cart': action === 'remove'
+                }"
+              ></em>
+              <span class="app-button__text">{{ buttonText }}</span>
             </button>
           </template>
         </product-card>
@@ -34,15 +44,25 @@ export default {
   },
 
   props: {
+    action: {
+      type: String,
+      default: "add"
+    },
     list: {
       type: Array,
       default: () => []
     }
   },
 
+  computed: {
+    buttonText() {
+      return this.action === "add" ? "Añadir cesta" : "Eliminar";
+    }
+  },
+
   methods: {
-    addCart(item) {
-      this.$emit("addCart", item);
+    itemAction(item) {
+      this.$emit("itemAction", item);
     }
   }
 };

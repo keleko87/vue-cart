@@ -41,7 +41,11 @@ export default {
   },
 
   methods: {
-    goToCart() {}
+    goToCart() {
+      if (this.$router.currentRoute.name !== "Cart") {
+        this.$router.push({ name: "Cart" });
+      }
+    }
   }
 };
 </script>

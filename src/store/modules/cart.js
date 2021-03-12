@@ -9,6 +9,11 @@ const getters = {
 const mutations = {
   SET_ITEM_IN_CART(state, item) {
     state.items = [...state.items, item];
+  },
+
+  REMOVE_ITEM_CART(state, itemRemove) {
+    const items = state.items.filter(item => item.id !== itemRemove.id);
+    state.items = [...items];
   }
 };
 
@@ -26,6 +31,12 @@ const actions = {
       alert(`El artículo "${existsItem.title}" ya existe en el cesta`);
     } else {
       commit("SET_ITEM_IN_CART", newItem);
+    }
+  },
+
+  removeItemCart({ commit }, itemRemove) {
+    if (state.items.length) {
+      commit("REMOVE_ITEM_CART", itemRemove);
     }
   }
 };

@@ -6,7 +6,11 @@
 
     <div v-else class="home__content">
       <div class="home__list">
-        <product-list :list="products" @addCart="addCart($event)" />
+        <product-list
+          :list="products"
+          action="add"
+          @itemAction="addItemInCart($event)"
+        />
       </div>
     </div>
   </div>
@@ -44,11 +48,10 @@ export default {
     }),
 
     async findAllProduts() {
-      await this.findAll();
-    },
-
-    addCart(ev) {
-      this.addItemInCart(ev);
+      // Solo hacer la llamada a la API la primera vez
+      if (!this.products.length) {
+        await this.findAll();
+      }
     }
   }
 };
